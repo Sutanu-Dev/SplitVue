@@ -1,0 +1,16 @@
+:host {
+    --slds-c-input-radius-border : 25px;
+}
+
+.custom-modal {
+    min-height:55px;
+    
+    background:linear-gradient(45deg, #7bd2e6, #ca92e6);
+}
+
+.custom-button {
+    --slds-c-button-radius-border : 15px;
+    --slds-c-button-shadow : 0 0 15px #0176d3;
+    --slds-c-button-shadow-focus : 0 0 15px #0176d3;
+    
+}

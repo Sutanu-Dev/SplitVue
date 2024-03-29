@@ -1,0 +1,69 @@
+.custom-modal-header {
+    min-height:55px;
+    
+    background:linear-gradient(45deg, #7bd2e6, #ca92e6);
+}
+
+.settle-up-dev {
+    border-radius:10px; 
+    display:flex; 
+    align-items:center; 
+    width:98%; 
+    height:3em; 
+    /* background-color:rgb(89, 227, 200); */
+}
+
+:host {
+    --slds-c-card-radius-border : 15px;
+    --slds-c-card-color-background :transparent;
+    --slds-c-input-radius-border : 25px;
+    --slds-c-modal-radius-border : 25px;
+    --slds-c-button-radius-border : 25px;
+}
+
+.button-radius {
+    --slds-c-button-radius-border : 10px;
+}
+
+.back-image {
+    border-radius: 15px;
+    background-image: linear-gradient(135deg, transparent, #88ebca );
+    
+}
+
+ul {
+    animation: fadeIn 2s;
+}
+
+section {
+    animation: fadeIn 0.5s;    
+}
+
+.slds-progress-ring {
+    animation : fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInX {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+

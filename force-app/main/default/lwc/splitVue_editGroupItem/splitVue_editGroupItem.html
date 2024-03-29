@@ -1,0 +1,182 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container" >
+        <button onclick={closeGroupItemEditModalhandler} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+        <lightning-icon icon-name="utility:close"></lightning-icon>
+        <span class="slds-assistive-text">Cancel and close</span>
+        </button>
+        <div class="slds-modal__header custom-modal">
+        <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate"><!--Modal header--></h1>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium" style="min-height: 280px;" id="modal-content-id-2">
+    
+    
+    
+    <div class="slds-form">
+        <!-- /////   Name Field   \\\\\\ -->
+        <div class="slds-form-element slds-form-element_horizontal">
+            <label class="slds-form-element__label" for="horizontal-input-id-01">Name</label>
+            <div class="slds-form-element__control">
+            <input onchange={handleItemName} type="text" value={ItemName} id="horizontal-input-id-01" placeholder="" class="slds-input" />
+            </div>
+        </div>
+
+        <!-- /////   Paid By Field   \\\\\\ -->
+        <div class="slds-form-element slds-form-element_horizontal">
+            <label class="slds-form-element__label" for="combobox-id-3" id="combobox-label-id-77">Paid By</label>
+            <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+            <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
+            
+            <template if:false={userSelected}>
+                
+                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+            <input oninput={handleDropDown} type="text" class="slds-input slds-combobox__input " id="combobox-id-3" aria-activedescendant="option1" aria-autocomplete="list" aria-controls="listbox-id-3" aria-expanded="true" aria-haspopup="listbox" 
+            role="combobox" placeholder="Search..." />
+            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                <lightning-icon icon-name="utility:search" size="x-small"></lightning-icon>
+              </span>
+        </div>
+                
+                
+                <!-- <lightning-input
+                onchange={handleDropDown}
+                label="Paid By :"
+                type="search"
+                ></lightning-input> -->
+            </template>
+                <!-- ///////////////////// -->
+                <template if:true={userSelected}>
+                    <!-- <label class="slds-form-element__label" for="combobox-id-5" id="combobox-label-id-33">Paid By</label> -->
+                    <div class="slds-form-element__control">
+                    <div class="slds-combobox_container slds-has-selection">
+                    <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click">
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                    <span class="slds-icon_container slds-var-m-left_xx-small slds-icon-standard-avatar slds-combobox__input-entity-icon" title="User">
+                      <lightning-icon icon-name="standard:avatar"></lightning-icon>
+                      <span class="slds-assistive-text">User</span>
+                    </span>
+                    <div role="combobox" tabindex="0" class="slds-input_faux slds-combobox__input slds-combobox__input-value" aria-labelledby="combobox-label-id-33 combobox-id-5-selected-value" id="combobox-id-5-selected-value" aria-controls="listbox-id-5" aria-expanded="false"
+                      aria-haspopup="listbox">
+                      <span class="slds-truncate" id="combobox-value-id-20">{selectedUser}</span>
+                    </div>
+                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option">
+                      <lightning-icon onclick={handleRemoveSelectUser} icon-name="utility:close" size="x-small"></lightning-icon>
+                      <span class="slds-assistive-text">Remove selected User</span>
+                    </button>
+                  </div>
+                  </div>
+                </div>
+                </div>
+                </template>
+
+            <!-- </div> -->
+            <!-- <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                
+            <lightning-icon icon-name="utility:search" size="x-small"></lightning-icon>
+            </span> -->
+            <!-- </div> -->
+            <template if:true={showDropDown}>
+                <div id="listbox-id-3" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox" aria-label="Placeholder for Dropdown Items" tabindex="0" aria-busy="false">
+                <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                    <template for:each={userList} for:item="user">
+                    <li key={user.Id} onclick={getSelectedUser}  role="presentation" class="slds-listbox__item">
+                        <div  aria-selected="true" id="option523" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                          <span class="slds-media__figure slds-listbox__option-icon">
+                            <span style="background: transparent;" class="slds-icon_container slds-icon-standard-account">
+                              <lightning-icon icon-name="action:user" size="xx-small"></lightning-icon>
+                            </span>
+                          </span>
+                          <span class="slds-media__body">
+                            <span data-label={user.Group_Member__r.Name} data-userid={user.Group_Member__r.Id} class="slds-listbox__option-text slds-listbox__option-text_entity slds-var-p-vertical_small">{user.Group_Member__r.Name}</span>
+                            <!-- <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">User</span> -->
+                          </span>
+                        </div>
+                      </li>
+                    </template>                        
+                </ul>
+                </div>
+        </template>
+            </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- /////   Price Field   \\\\\\ -->
+        <div class="slds-form-element slds-form-element_horizontal">
+            <label class="slds-form-element__label" for="text-input-id-50" id="fixed-text-label">Price</label>
+            <div class="slds-form-element__control slds-input-has-fixed-addon">
+            <span class="slds-form-element__addon" id="fixed-text-addon-pre">₹</span>
+            <input onchange={getPriceHandler} type="text" id="text-input-id-50" value={ItemPrice} placeholder="0.00" aria-labelledby="fixed-text-label fixed-text-addon-pre fixed-text-addon-post" class="slds-input" />
+            <!-- <span class="slds-form-element__addon" id="fixed-text-addon-post">euro</span> -->
+            </div>
+        </div>
+
+        <!-- /////   Shared With Field   \\\\\\ -->
+        <div class="slds-form-element slds-form-element_horizontal">
+            <label class="slds-form-element__label" for="horizontal-input-id-03">Shared With</label>
+            <div class="slds-form-element__control">
+                
+                <div class="slds-select_container">
+                    <select onchange={handleSelection} class="slds-select" id="horizontal-input-id-03">
+                      <!-- <option value="">Select…</option> -->
+                      <option value="Equally">All Equally</option>
+                      <option value="Individual">Select Individual</option>
+                    </select>
+                </div>
+    <template if:true={SelectIndividual}>
+            <div class="slds-scrollable slds-grow">
+                <div class="slds-scrollable_none">
+                    
+                    <table aria-multiselectable="true" class="slds-table slds-table_header-hidden slds-no-row-hover slds-table_bordered" role="grid" aria-label="List of Group Members">
+                    <!-- <thead class="slds-assistive-text">
+                      <tr class="slds-line-height_reset">
+                        <th class="" scope="col" style="width:3.75rem"></th>
+                        <th aria-label="Product Name" class="" scope="col">
+                          <div class="slds-truncate" title="Product Name">Product Name</div>
+                        </th>
+                      </tr>
+                    </thead> -->
+                    <tbody>
+                      <template for:each={groupMembers} for:item="member">
+                        <tr key={member.Id} aria-selected="false" class="slds-hint-parent">
+                        <td role="gridcell">
+                          
+                            <div style="color: #1a66d7;" class="slds-truncate" title="Group Member">{member.Group_Member__r.Name}</div>
+                          
+                        </td>
+                        <td class="slds-text-align_right" role="gridcell" style="width:3.75rem; box-shadow:none;" tabindex="0">
+                            <!-- <label class="slds-checkbox-button" for="example-unique-id-340"> -->
+                                <lightning-button-icon-stateful data-id={member.Group_Member__r.Id} data-label={member.Group_Member__r.Name} 
+                                icon-name="utility:add"  onclick={handleAddButtonClick}></lightning-button-icon-stateful>
+                                <!-- <input type="checkbox" class="slds-assistive-text" id="example-unique-id-340" tabindex="-1" />
+                            <span class="slds-icon_container slds-icon-utility-add slds-current-color" title="Description of icon when needed">
+                              <lightning-icon icon-name="utility:add" size="small"></lightning-icon>
+                              <span class="slds-assistive-text">Add User</span>
+                            </span> -->
+                        <!-- </label> -->
+                          
+                        </td>
+                      </tr>
+                    </template>
+                      </tbody>
+                      </table>
+                    
+                    </div>
+                </div>
+            </template>
+            </div>
+        </div>
+        
+    </div>
+
+
+    </div>
+    <div class="slds-modal__footer">
+    <button onclick={closeGroupItemEditModalhandler} class="slds-button slds-button_neutral custom-button" aria-label="Cancel and close">Cancel</button>
+    <button onclick={editGroupItemHandler} class="slds-button slds-button_brand custom-button">Update</button>
+    </div>
+    </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>

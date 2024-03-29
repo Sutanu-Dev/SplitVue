@@ -1,0 +1,67 @@
+
+.group-cover {
+    position: relative;
+    width: 100%;
+    height: 140px; /* Set the desired height for your cover */
+    background: url("https://img.freepik.com/premium-vector/abstract-geometric-polygon-blue-background-perfect-wallpaper-backdrop-postcard-background_565280-398.jpg?w=1060") no-repeat center/cover;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
+.cover-image {
+    width: 100%;
+    height: 150px;
+    /* background: red; */
+    /* object-fit: cover; */
+    
+}
+
+.profile-picture {
+    position: absolute;
+    bottom: -20px; /* 5Adjust the distance from the bottom as needed */
+    left: 12px; /* 20Adjust the distance from the left as needed */
+    border: 3px solid lightseagreen; /* Optional: Add a border around the profile picture*/
+    border-radius: 50%; /* Optional: Make the profile picture circular*/
+    height: 79.5px;
+    width: 80px;
+    
+}
+
+.profile-picture img {
+    width: 76px; /* 80 Set the desired width for your profile picture */
+    height: 74px; /* 80 Set the desired height for your profile picture */
+    object-fit: cover;
+    border-radius: 50%; /* Make the profile picture circular */
+    /* border: 3px solid transparent; */
+    
+}
+
+.group-name {
+    position: absolute;
+    bottom: -14px; /* Adjust the distance from the bottom as needed */
+    left: 5.2em; /* Adjust the distance from the left as needed */
+    font-size: 20px;
+    /* clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%); */
+    /* background-image:linear-gradient(45deg, rgb(34, 218, 89),rgb(67, 223, 234),rgb(255, 0, 251)) ;   */
+    background: rgba(123, 170, 206, 0.573);
+    border : 3px solid lightseagreen;
+    width: 12em;
+    height:2.5em;
+    border-radius: 25px;
+    
+    
+
+}
+
+/* .group-name div {
+
+    position: absolute;
+    bottom: 0;
+    height: calc(100% - 0.2em);
+    width: calc(100% - 0.2em);
+    background: white;
+    clip-path: polygon(19% 0%, 100% 0%, 100% 100%, 0% 100%);
+    margin-left: 0.2em;
+    font-style: italic;
+    border-radius: 25px;
+} */

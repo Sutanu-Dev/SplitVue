@@ -1,0 +1,180 @@
+<template>
+    
+
+    <div class="slds-var-p-bottom_x-large slds-scrollable_y">
+    <ul class="slds-accordion">
+        <template for:each={GroupItems} for:item="groupItem">
+            <li key={groupItem.Id} >
+                <div class=" slds-card slds-var-m-bottom_medium" style="min-height: 70px; background:linear-gradient(45deg,#a4dce9,#b7b6f3); ">
+                    <!-- <div class="slds-grid slds-wrap"> -->
+                        <!-- <div style="object-fit: cover; background-color: black; height:inherit" class="slds-col slds-size_1-of-6">
+                            
+                            <div style="min-height: 100%; min-width:100%">
+                                
+                                <img src={image} alt="itemIcon">
+                            </div>
+                        </div> -->
+                        <!-- <div class="slds-col slds-grid slds-wrap slds-size_5-of-6"> -->
+                        <!-- <div class="slds-col slds-size_1-of-1"> -->
+                            <lightning-accordion allow-multiple-sections-open
+                                onsectiontoggle={handleSectionToggle}
+                                active-section-name={activeSections}>
+                                <lightning-accordion-section name="A" label={groupItem.Name} >
+                                <div class="slds-var-m-right_xx-large slds-float_right">
+                                    <p style="color:rgb(31, 90, 152)">Added On :</p>
+                                    <p style="font-style: italic;">{groupItem.Date}</p>
+                                    <button onclick={handleGroupItemDeleteModal} data-groupitemlabel={groupItem.Name} data-groupitemid={groupItem.Id} class="accordiandeletebtn slds-var-m-right_small slds-var-m-vertical_x-small ">
+                                        <i><lightning-icon icon-name="action:delete" size="x-small"></lightning-icon></i>
+                                    </button>
+                                    <button onclick={handleGroupItemEditModal} data-shareduser={groupItem.SharedUsers} data-itemprice={groupItem.Price} data-paidbyuserid={groupItem.PaidByUserId} data-paibyuser={groupItem.PaidByUser} data-groupitemlabel={groupItem.Name} data-groupitemid={groupItem.Id} class="accordianeditbtn slds-var-m-vertical_x-small ">
+                                        <i><lightning-icon icon-name="action:edit" size="x-small"></lightning-icon></i>
+                                    </button>
+                                </div>
+                                <div class="slds-var-p-left_large slds-var-p-bottom_medium">
+                                <div><lightning-icon icon-name="utility:user" size="x-small"></lightning-icon><span style="color:rgb(31, 90, 152); font-family: monospace;"><strong> Shared With :</strong></span></div>
+                                <template if:true={groupItem.ItemShared}>
+                                <template for:each={groupItem.SharedUsers} for:item="userList">
+                                    
+                                    <p key={userList.Id} class="slds-var-m-left_large">{userList.Name}</p>
+                                </template>
+                                </template>
+                                <template if:false={groupItem.ItemShared}>
+                                    <div class="slds-var-m-left_xx-small slds-var-p-top_x-small">
+                                        <!-- <lightning-icon icon-name="utility:warning" size="small"></lightning-icon> -->
+                                        <div><img style="height:20px; width:20px" src={warningImage}> <span style="font-style: italic;"> Item Not Shared Yet.</span></div>
+                                        
+                                    </div>
+                                </template>
+                                </div>
+                                
+                                </lightning-accordion-section>
+                            </lightning-accordion>
+
+                            
+                        <!-- </div> -->
+                    
+                        <div class=" slds-var-m-left_x-large slds-var-p-left_xx-small slds-var-p-bottom_x-small">
+                            <a href="#">{groupItem.PaidByUser}</a> <span style="font-style: italic; padding:3px 3px;">Paid </span><span style="color: rgb(2, 104, 2);">₹{groupItem.Price}</span>
+                        </div>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                </div>
+
+            </li>
+        </template>
+        </ul>
+
+        <!-- modal section for GROUP ITEM Delete Button-->
+        <template if:true={openGroupItemDeleteModal}>
+            
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" >
+                <button onclick={closeGroupItemDeleteModalhandler} class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                <lightning-icon icon-name="utility:close"></lightning-icon>
+                <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__header custom-modal">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate"><!--Modal header--></h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium custom-modal-content" id="modal-content-id-1">
+                    <p class="slds-text-heading_small">Do You Want To Delete <span style="color:rgb(31, 90, 152)"><strong>"{groupItemLabel}".</strong></span></p>
+                    <p class="slds-text-heading_small">{catchDeleteException}</p>
+                    <p class="slds-text-heading_small">{deleteGroupItemLWCError}</p>
+                </div>
+                <div class="slds-modal__footer">
+                <button onclick={closeGroupItemDeleteModalhandler} class="slds-button slds-button_neutral custom-button" aria-label="Cancel and close">Cancel</button>
+                <button onclick={deleteGroupItemHandler} class="slds-button slds-button_destructive custom-destructive-button">Delete</button>
+                </div>
+                </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+            
+            </template>
+            <!-- modal section for GROUP ITEM Edit Button-->
+        <template if:true={openGroupItemEditModal}>
+            
+            
+                    
+                    <c-Split-vue_edit-group-item oncancelclick={closeEditModalFromChild} 
+                    
+                        grp-item-id={groupItemId}
+                        item-price-value ={itmPrice}
+                        item-paid-user-value ={itmPaidUser}
+                        item-lable-value ={itmLabel}
+                        item-paid-user-id-value ={itmPaidUserId}
+                        refresh-gi={refreshGroupItems}
+                    ></c-Split-vue_edit-group-item>
+                
+            
+            </template>
+    </div>
+
+
+    <!-- <ul class="slds-timeline">
+        <template for:each={GroupItems} for:item="groupItem">
+        <li key={groupItem.Id}>
+            <div class="slds-timeline__item_expandable slds-timeline__item_task slds-is-open">
+                <span class="slds-assistive-text">Group Item</span>
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning-button-icon data-recid={groupItem.Id} aria-controls={groupItem.Id} aria-expanded="false" size="small"  onclick={handleClick} icon-name={utilityIcon}  alternative-text="expand" title="Expand"></lightning-button-icon>
+                        <div class="slds-icon_container slds-icon-standard-task slds-timeline__icon" title="task">
+                            <lightning-icon size="small" icon-name="standard:task" alternative-text="task" title="Task"></lightning-icon>
+                        </div>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-grid slds-grid_align-spread slds-timeline__trigger">
+                        <div class="slds-text-heading_small slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">            
+                        
+                            <a href="#">
+                            <strong>{groupItem.Name}</strong>
+                            </a>
+                        </div>
+                        
+                        <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">    
+                            <lightning-button-icon aria-haspopup="true" aria-expanded="true" onclick={handleDownClick} icon-name={itemMenuButtonIcon} size="small" alternative-text="down" title="Down"></lightning-button-icon>
+                            
+                            <div if:true={menuDownClicked} class="slds-dropdown slds-dropdown_right">
+                                <ul style="width: 100px;" class="slds-dropdown__list" role="menu" aria-label="Show More">
+                                    <li  class="slds-dropdown__item" role="presentation">
+                                        
+                                        <button class="li-button-one " ><h1><strong>Edit</strong></h1></button>
+                                        
+                                    </li>
+                                    <li class="slds-dropdown__item" role="presentation">
+                                        <button class="li-button-two"><h1><strong>Delete</strong></h1></button>
+                                    </li>
+                                </ul>            
+                            </div>                      
+                        </div>
+                        
+                        </div>
+                        <p class="slds-m-horizontal_xx-small">
+                        <a href="#">{groupItem.Paid_By__r.Name}</a> <span style="font-style: italic; padding:3px 3px;">Paid</span><a href="#"> ₹{groupItem.Price__c}</a>
+                        
+                        </p>
+                       
+                            <article style="background: beige;" class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small slds-p-around_medium" id={groupItem.Id} aria-hidden="true">
+                                <ul class="slds-list_horizontal slds-wrap">
+                                <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                <span class="slds-text-title slds-p-bottom_x-small">Added On</span>
+                                <p class="slds-timeline__date">{groupItem.CreatedDate}9:00am | 3/20/17</p>
+                                
+                                </li>
+                                
+                                </ul>
+                                <div>
+                                <span class="slds-text-title">Shared With</span>
+                                <p class="slds-p-top_x-small">List Of People Goes Here</p>
+                                </div>
+                            </article>
+                        
+                    </div>
+                </div>
+            </div>
+        </li>
+    </template>
+    </ul> -->
+
+    <c-split-vue_add-expense-button refresh-gi={refreshGroupItems}></c-split-vue_add-expense-button>
+</template>

@@ -1,0 +1,109 @@
+.li-button-one {
+
+    width :100px; 
+    height : 30px;
+    background : linear-gradient(to right,  aquamarine, rgb(112, 185, 238));
+    border-radius: 7px;
+    font-size: medium;
+    margin-bottom: 2px;
+        
+}    
+
+.li-button-two {
+    width :100px; 
+    height : 30px;
+    background : linear-gradient(to right, rgb(223, 86, 113), rgb(202, 69, 186));
+    border-radius: 7px;
+    font-size: medium;
+    margin-top: 2px;
+}
+
+.accordiandeletebtn {
+    
+    border-radius: 25px; 
+    background-color:transparent; 
+    border:none; 
+    box-shadow:0 0 15px #d65095;
+    aspect-ratio: 1/1;
+    /* width:35px; */
+    
+}
+
+.accordianeditbtn {
+
+    border-radius: 25px; 
+    background-color:transparent; 
+    border:none;    
+    box-shadow:0 0 15px #1ea789; 
+    aspect-ratio: 1/1;
+    /* width:50px; */
+}
+
+.accordiandeletebtn:active,
+.accordiandeletebtn:hover{
+
+    box-shadow:0 0 25px #d65095;
+    background-color: #d65095;
+}
+
+.accordianeditbtn:active,
+.accordianeditbtn:hover{
+    background-color: #1ea789;
+    box-shadow:0 0 25px #1ea789;
+}
+
+.custom-modal {
+    min-height:55px;
+    
+    background:linear-gradient(45deg, #7bd2e6, #ca92e6);
+}
+
+.custom-modal-content {
+    min-height:100px; 
+    display: flex; 
+    align-items: center; 
+    justify-content:center;
+}
+
+:host {
+    --slds-c-modal-radius-border : 25px;
+    --slds-c-card-radius-border : 10px;
+}
+
+.custom-button {
+    --slds-c-button-radius-border : 15px;
+    --slds-c-button-shadow : 0 0 15px #0176d3;
+    --slds-c-button-shadow-focus : 0 0 15px #0176d3;
+    
+}
+
+.custom-destructive-button {
+    --slds-c-button-radius-border : 15px;
+    --slds-c-button-shadow : 0 0 15px #e52d6a;
+    --slds-c-button-shadow-focus : 0 0 15px #e52d6a;
+    
+}
+
+ul {
+    animation: fadeIn 2s;
+}
+
+section {
+    animation: fadeIn 1s;
+    
+}
+
+c-Split-vue_edit-group-item {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,64 @@
+<template>
+    <template if:false={hasData}>
+        <div class="demo-only" style="height:6rem;position:relative">
+            <div class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+            </div>
+            </div>
+            </div>
+    </template>
+
+<template if:true={hasData}>
+    
+<ul>
+    <template for:each={groupMembers} for:item="member">
+    <li key={member.Id}>
+    <table class="slds-table slds-table_cell-buffer slds-table_header-hidden slds-table_bordered" aria-label="Group Members">        
+        
+        <tbody class="slds-var-m-top_large ">            
+            
+            <tr class="slds-hint-parent">
+                <th scope="row">
+                    <div class="slds-truncate" title="Cloudhub">
+                        <Span class="slds-text-heading_small" style="color:#0176d3">{member.Group_Member__r.Name}</Span>
+                    </div>
+                </th>
+                <td>
+                    <lightning-button-icon class="slds-float_right" data-label={member.Group_Member__r.Name} data-recid={member.Id} onclick={removeMemberHanlder} icon-name="utility:close" size="small"></lightning-button-icon>
+                </td>
+            </tr>      
+        </tbody> 
+          
+    </table>
+</li>
+</template>
+</ul>
+
+</template>
+
+<template if:true={removeMemberPrompt}>
+
+    
+        <section role="dialog" tabindex="0" aria-modal="true" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt">
+        <div class="slds-modal__container">
+        <div class="slds-modal__header slds-theme_warning slds-theme_alert-texture">
+        <h1 class="slds-text-heading_medium" id="prompt-heading-id">Warning !</h1>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+        <p class="slds-text-heading_small">Do You Want To Remove <span style="color: #0176d3;"><strong>{memberName}</strong></span> From This Group ?</p>
+        </div>
+        <div class="slds-modal__footer slds-theme_default">
+        <button style="box-shadow: none;" onclick={cancelRemove} class="slds-button slds-button_success">Go Back</button>
+        <button style="box-shadow: none;" onclick={removeMember} class="slds-button slds-button_destructive">Remove</button>
+
+        </div>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    
+
+</template>
+</template>
